@@ -32,7 +32,7 @@ userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
       return next();
     }
-    
+
     const saltRound = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(this.password, saltRound);
     this.password = hashPassword;
@@ -56,10 +56,10 @@ userSchema.methods.generateToken = function () {
         email: this.email,
         isAdmin: this.isAdmin,
       },
-      process.env.JWT_SECRET_KEY, // Ensure this environment variable is properly set
-      {
-        expiresIn: "30d", // expires in 30 days
-      }
+      process.env.JWT_SECRET_KEY // Ensure this environment variable is properly set
+      // {
+      //   expiresIn: "30d", // expires in 30 days
+      // }
     );
     console.log("Generated Token:", token); // Log the generated token for debugging
     return token;
