@@ -16,7 +16,7 @@ const home = async (req,res) => {
 const register = async (req, res) => {
     try {
      console.log("users Registred");
-      console.log(req.body);
+      console.log(req.body);  // ---> to show data in the body
       const { username, email, phone, password } = req.body;
   
       const userExist = await User.findOne({ email });
